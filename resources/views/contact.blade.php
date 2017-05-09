@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+{{--ovom komadnom inkludamo layout napravljen u app.php--}}
+@extends('layouts.app')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@section('content')
 
-    </head>
-    <body>
-        <div class="container">
-            <h1> Contact page {{$id}} {{$name}} {{$password}}</h1>
-        </div>
-    </body>
-</html>
+    <h1>Contact page </h1>
+
+    <ul>
+    {{--count je ugrađena f-ja--}}
+    @if(count($people))  {{--ako postoji neki podaci u array-u--}}
+        @foreach($people as $person)
+            <li> {{$person}} </li>
+        @endforeach
+
+    @endif
+    </ul>
+@stop

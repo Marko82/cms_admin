@@ -34,7 +34,7 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return "Hi, I'm contact!";
 });
-*/
+
 
 //ruta do određenog posta - pr. 1 (http://localhost/cms_admin/public/post/1/marko)
 //unutar {} možemo staviti bilo koje ime za varijablu
@@ -60,6 +60,7 @@ Route::get('admin/posts/example', array('as' => 'admin.home', function(){
     return "this url is: " . $url;
 
 }));
+*/
 
 /*RESURSI -> php artisan route:list
  * 1)sve između ' ' puput 'res' je url
@@ -77,13 +78,12 @@ Route::resource('res','PostsController'); //This is the show method with id para
 //prosljeđivanje with metodom
 //http://localhost:8000/contact/ada
 //http://localhost:8000/contact/3/marko/123 - za compact
-Route::get('/contact/{id}/{name}/{password}', 'PostsController@contact');
+Route::get('/contact', 'PostsController@contact');
 
 //prikaz ktoz array-a
 Route::get('/admin',function (){
     return view('admin', ['id' => 'Prvi']);
 });
-
-//prosljeđivanje ktoz array
-Route::get('/list', 'PostsController@list');
+//http://localhost:8000/posts/3/2/123
+Route::get('/posts/{id}/{name}/{password}', 'PostsController@posts');
 

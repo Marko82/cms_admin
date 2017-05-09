@@ -86,15 +86,18 @@ class PostsController extends Controller
         //
     }
 
-    public function contact($id,$name,$password){
+    //prosljeđivanje array-a
+    public function contact(){
+        $people = ['Marko','Ivan', 'Matija' , 'Filip' ,'Luka' ,'Marija'];
+
+        return view('contact', compact('people'));
+    }
+
+    public function posts($id,$name,$password){
         //vrlo loš način za prosljeđivanje podataka
         //return view('contact')->with('id', $id);
         //bolji način
-        return view('contact', compact('id','name','password'));
+        return view('posts', compact('id','name','password'));
     }
 
-     public function list(){
-        $data = [1,2,3];
-        return view('list',compact('data'));
-      }
 }
