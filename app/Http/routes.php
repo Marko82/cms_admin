@@ -87,3 +87,42 @@ Route::get('/admin',function (){
 //http://localhost:8000/posts/3/2/123
 Route::get('/posts/{id}/{name}/{password}', 'PostsController@posts');
 
+
+/*RAD S BAZOM
+ * Queries are using the DB facade.
+ * DB facade provides methods for each type of query: select, update, insert, delete, and statement
+ */
+
+Route::get('/insert', function(){
+    //upitnici su PDO placeholderi jer: parameter bindings that need to be bound to the query
+    //$users = DB::select('select * from users where active = ?', [1]);
+    //$results = DB::select('select * from users where id = :id', ['id' => 1]);
+    //DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+
+   DB::insert('insert into posts(title, content) values(?, ?)',['PHP with Laravel','Laravel is the best MVC framework']);
+
+});
+
+Route::get('/read', function(){
+    $result = DB::select('select * from posts where id = ?', [1]);
+
+  foreach ($result as $post){
+       return $post->title;
+    }
+    //alternativan način -> vraća direktan view 
+    //return view('read',['result' => $result]);
+});
+
+Route::get('/update', function() {
+    //$affected = DB::update('update users set votes = 100 where name = ?', ['John']);
+    //update vraća broj tj. zahavećni red "affected row"
+    $update = DB::update('update posts set title = "Update title" where id=?', [1]);
+    return $update;
+});
+
+Route::get('/delete', function() {
+   //$deleted = DB::delete('delete from users');
+    //vraća broj obrisanih redaka
+    $delete = DB::delete('delete from posts where id=?', [1]);
+    return $delete;
+});
